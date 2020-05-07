@@ -14,17 +14,24 @@ linux+Anaconda3+python3.7+CUDA8.0+cudnn6.0
 本次标注数据修改规范：
 1、organization_name   组织/部门名称 
 可以举办活动/会议的均标注为该类实体，如青岛市工信局、青岛海尔集团、某学校、某医院等，标注时将“青岛市工信局”整体标注为实体，不要将青岛市与工信局拆开
+
 2、facilities 设施     
 不可以举办活动的标注为设施，如某港口、某码头、生态廊道、某机场、公园等，若名字中包含城市名，需将整体进行标注，如“浙江杭州萧山机场”为一个实体
+
 3、activity_name     活动/事件名称 
 会议、宣传活动、新闻发布会等，若名字中包含城市名，需将整体进行标注，如“青岛市服务海尔发展工作专班第一次会议” 为一个实体
+
 4、articals   清单/草案/规划/方案等
 如十三五规划、XX实施方案、公告等
+
 5、time 时间     
 年份、月份、年月、年月日、年月日时分秒等统一标为时间
+
 6、address  地址
 国家、省、市、县、街道等统一标注为地址，类似“我市”、“该市”、“我国”等，不进行标注
+
 7、indicators     指标     
+
 8、data 数据     
 标注数据时把单位一并标上，如“200亿元”，注意数据和日期，如“17日”根据前后文判断应标注为哪一类
 数据集分为三部分
@@ -33,12 +40,15 @@ linux+Anaconda3+python3.7+CUDA8.0+cudnn6.0
 3、	测试集 实体710个
 
 详见附件
+
 3.	模型
- 
+
+Bert+BiLstm+自注意力+CRF
 
 Bert模型：数据预处理
 CRF模型：增加label的限制
 BiLstm+自注意力模型：通过解决长依赖，提取实体
+
 4.	操作步骤
 1	调试参数
 第一步：导入数据集和标签文件
@@ -101,6 +111,7 @@ total 8
 drwxr-xr-x  2 root root 4096 5月   7 11:53 ./
 drwxr-xr-x 12 root root 4096 5月   7 11:51 ../
 -rw-r--r--  1 root root    0 5月   7 11:53 pre_result.csv
+
 5.	命令总结
 1、	Bert模型+CRF模型
 (tensorflow_py37_gpu) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# nohup python -u run.py -crf_only=True > logs/main.log 2>&1 &
