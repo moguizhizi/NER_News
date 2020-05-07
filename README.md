@@ -118,6 +118,7 @@ drwxr-xr-x 12 root root 4096 5月   7 11:51 ../
 -rw-r--r--  1 root root    0 5月   7 11:53 pre_result.csv
 
 5.	命令总结
+
 1、	Bert模型+CRF模型
 (tensorflow_py37_gpu) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# nohup python -u run.py -crf_only=True > logs/main.log 2>&1 &
 
