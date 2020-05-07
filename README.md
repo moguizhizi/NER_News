@@ -57,6 +57,7 @@ BiLstm+自注意力模型：通过解决长依赖，提取实体
 4.	操作步骤
 
 1	调试参数
+
 第一步：导入数据集和标签文件
 进入data_preprocess文件夹下，导入train_data.txt，dev_data.txt，test_data.txt，labels.txt
 
