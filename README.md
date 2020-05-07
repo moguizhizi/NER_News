@@ -49,8 +49,6 @@ BiLstm+自注意力模型：通过解决长依赖，提取实体
 第二步：进入虚拟环境
 root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# source activate
 (base) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# conda env list
-# conda environments:
-#
 base                  *  /usr/local/anaconda3
 tensorflow_py37          /usr/local/anaconda3/envs/tensorflow_py37
 tensorflow_py37_gpu      /usr/local/anaconda3/envs/tensorflow_py37_gpu
