@@ -101,7 +101,9 @@ accuracy:  93.54%; precision:  64.26%; recall:  66.81%; FB1:  65.51
        indicators: precision:  20.00%; recall:  28.33%; FB1:  23.45  85
 organization_name: precision:  68.42%; recall:  70.48%; FB1:  69.44  171
              time: precision:  81.63%; recall:  87.91%; FB1:  84.66  98
+             
 2	实体抽取
+
 第一步：待抽取的文件放置NERdata路径下，并更名为pre_text
 
 第二步：执行terminal_predict.py
