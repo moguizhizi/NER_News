@@ -7,9 +7,12 @@
 
 
 1.	环境
+
 linux+Anaconda3+python3.7+CUDA8.0+cudnn6.0
 安装指导: https://blog.csdn.net/qq_38901147/article/details/90049666
+
 2.	数据集
+
 一共分为8类标签
 本次标注数据修改规范：
 
@@ -51,6 +54,7 @@ CRF模型：增加label的限制
 BiLstm+自注意力模型：通过解决长依赖，提取实体
 
 4.	操作步骤
+
 1	调试参数
 第一步：导入数据集和标签文件
 进入data_preprocess文件夹下，导入train_data.txt，dev_data.txt，test_data.txt，labels.txt
