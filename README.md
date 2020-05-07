@@ -9,6 +9,7 @@
 1.	环境
 
 linux+Anaconda3+python3.7+CUDA8.0+cudnn6.0
+
 安装指导: https://blog.csdn.net/qq_38901147/article/details/90049666
 
 2.	数据集
