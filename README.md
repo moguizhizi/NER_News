@@ -12,6 +12,7 @@ linux+Anaconda3+python3.7+CUDA8.0+cudnn6.0
 2.	数据集
 一共分为8类标签
 本次标注数据修改规范：
+
 1、organization_name   组织/部门名称 
 可以举办活动/会议的均标注为该类实体，如青岛市工信局、青岛海尔集团、某学校、某医院等，标注时将“青岛市工信局”整体标注为实体，不要将青岛市与工信局拆开
 
@@ -127,9 +128,6 @@ drwxr-xr-x 12 root root 4096 5月   7 11:51 ../
 
 5、	调整Batchsize
 (tensorflow_py37_gpu) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# nohup python -u run.py –batch_size = 10> logs/main.log 2>&1 &
-
-    
-
 
 
 
