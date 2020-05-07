@@ -132,4 +132,4 @@ drwxr-xr-x 12 root root 4096 5月   7 11:51 ../
 + [https://github.com/zjy-ucas/ChineseNER](https://github.com/zjy-ucas/ChineseNER)
 
 + [https://github.com/hanxiao/bert-as-service](https://github.com/hanxiao/bert-as-service)
-> Any problem please open issue OR email me(ma_cancan@163.com)
+> Any problem please open issue OR email me(moguizhiz@126.com)
