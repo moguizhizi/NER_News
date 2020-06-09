@@ -99,8 +99,8 @@ def predict_online(sentence):
         temp_sen = sentence
         start = datetime.now()
         if len(sentence) < 2:
-            print(sentence)
-            sys.exit(0)
+            print("invalid sentence:" + sentence)
+            return
         sentence = tokenizer.tokenize(sentence)
         print('your input is:{}'.format(sentence))
         input_ids, input_mask = convert(sentence)
