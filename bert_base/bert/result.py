@@ -67,10 +67,6 @@ class Result(object):
         if entity_name != "":
             labels_map[last_type].append(entity_name)
 
-        for key, value in labels_map.items():
-            print("key:" + str(key))
-            print("value:" + str(value))
-
         return  labels_map
 
     def init_labels_map(self):
