@@ -10,18 +10,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-
-#
-# def start_server():
-#     from bert_base.server import BertServer
-#     from bert_base.server.helper import get_run_args
-#
-#     args = get_run_args()
-#     print(args)
-#     server = BertServer(args)
-#     server.start()
-#     server.join()
-
+import shutil
 
 def train_ner():
     import os
@@ -35,13 +24,10 @@ def train_ner():
         print('usage: %s\n%20s   %s\n%s\n%s\n' % (' '.join(sys.argv), 'ARG', 'VALUE', '_' * 50, param_str))
     print(args)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.device_map
+    
+    shutil.rmtree(args.output_dir)    
+    
     train(args=args)
-
-
 if __name__ == '__main__':
-    """
-    如果想训练，那么直接 指定参数跑，如果想启动服务，那么注释掉train,打开server即可
-    """
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.DEBUG)
     train_ner()
-    #start_server()
