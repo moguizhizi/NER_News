@@ -57,7 +57,6 @@ def parse_args(argv):
 
 
 def parse_tag(t):
-    print("parse_tag:" + str(t))
     m = re.match(r'^([^-]*)-(.*)$', t)
     return m.groups() if m else (t, '')
 
@@ -65,8 +64,6 @@ def parse_tag(t):
 def evaluate(iterable, options=None):
     if options is None:
         options = parse_args([])    # use defaults
-
-    # print(options)
 
     counts = EvalCounts()
     num_features = None       # number of features per line
@@ -113,15 +110,9 @@ def evaluate(iterable, options=None):
         start_guessed = start_of_chunk(last_guessed, guessed,
                                        last_guessed_type, guessed_type)
 
-        # print("end_correct:" + str(end_correct))
-        # print("end_guessed:" + str(end_guessed))
-        # print("start_correct:" + str(start_correct))
-        # print("start_guessed:" + str(start_guessed))
-
         if in_correct:
             if (end_correct and end_guessed and
                 last_guessed_type == last_correct_type):
-
                 in_correct = False
                 counts.correct_chunk += 1
                 counts.t_correct_chunk[last_correct_type] += 1
@@ -148,7 +139,6 @@ def evaluate(iterable, options=None):
         last_correct_type = correct_type
 
     if in_correct:
-        print("in correct line:" + str(line))
         counts.correct_chunk += 1
         counts.t_correct_chunk[last_correct_type] += 1
 
@@ -157,7 +147,6 @@ def evaluate(iterable, options=None):
 
 
 def uniq(iterable):
-  print("iterable:" + str(iterable))
   seen = set()
   return [i for i in iterable if not (i in seen or seen.add(i))]
 
@@ -176,9 +165,6 @@ def metrics(counts):
         c.correct_chunk, c.found_guessed, c.found_correct
     )
     by_type = {}
-    print("metrics:" + str(list(c.t_found_correct)))
-    print("metrics:" + str(c.t_found_correct))
-    print("uniq:" + str(uniq(list(c.t_found_correct) + list(c.t_found_guessed))))
     for t in uniq(list(c.t_found_correct) + list(c.t_found_guessed)):
         by_type[t] = calculate_metrics(
             c.t_correct_chunk[t], c.t_found_guessed[t], c.t_found_correct[t]
@@ -243,8 +229,6 @@ def report_notprint(counts, out=None):
         line.append('recall: %6.2f%%; ' % (100.*m.rec))
         line.append('FB1: %6.2f  %d\n' % (100.*m.fscore, c.t_found_guessed[i]))
         final_report.append("".join(line))
-
-    print(final_report)
     return final_report
 
 
@@ -276,7 +260,6 @@ def end_of_chunk(prev_tag, tag, prev_type, type_):
 def start_of_chunk(prev_tag, tag, prev_type, type_):
     # check if a chunk started between the previous and current word
     # arguments: previous and current chunk tags, previous and current types
-
     chunk_start = False
 
     if tag == 'B': chunk_start = True

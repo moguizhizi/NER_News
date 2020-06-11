@@ -44,6 +44,9 @@ def get_args_parser():
     group1.add_argument('-result_file', type=str, default=os.path.join(os.path.join(root_path, 'result'), 'pre_result.csv'),
                         help='predict result path')
 
+    group1.add_argument('-rule_file', type=str, default=os.path.join(os.path.join(root_path, 'data_preprocess'), 'relation_rule.csv'),
+                        help='relation rule path')
+
     group2 = parser.add_argument_group('Model Config', 'config the model params')
     group2.add_argument('-max_seq_length', type=int, default=202,#100
                         help='The maximum total input sequence length after WordPiece tokenization.')
