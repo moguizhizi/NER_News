@@ -10,15 +10,18 @@
 import re
 import pandas as pd
 import itertools
+import codecs
 
 class Result(object):
 
-    def __init__(self, tokens, tags, line, file):
+    def __init__(self, tokens, tags, line, result_file, rule_file, labels_file):
 
         self.tokens = tokens
         self.tags = tags
-        self.file = file
         self.line = line
+        self.result_file = result_file
+        self.rule_file = rule_file
+        self.labels_file = labels_file
 
     def preprocess(self):
         if len(self.tokens) > len(self.tags):
@@ -28,19 +31,34 @@ class Result(object):
         entity_list = []
         frame_list = []
         temp_list = []
+
+        nrows = self.get_labels_num(self.labels_file)
+        rule = self.get_rule_matrix(self.rule_file, nrows)
+
         result_map = self.get_reslut()
-        for _, value in result_map.items():
-            entity_list.extend(value)
-        entity_couple_list = list((itertools.permutations(entity_list, 2)))
+        for lable, entities in result_map.items():
+            if entities:
+               for entity in entities:
+                   temp_couple = (entity, lable)
+                   entity_list.append(temp_couple)
+
+        entity_couple_list = list((itertools.combinations(entity_list, 2)))
         for temp_couple in entity_couple_list:
-            for temp in temp_couple:
-                temp_list.append(temp)
+            temp_entity01 = temp_couple[0]
+            temp_entity02 = temp_couple[1]
+
+            if self.relation_rule_invalid(label1 = temp_entity01[1], label2 = temp_entity02[1], rule = rule):
+                print(str(temp_entity01[1]) + " and " + str(temp_entity02[1]) + " is incompatible rule")
+                continue
+
+            temp_list.append(temp_entity01[0])
+            temp_list.append(temp_entity02[0])
             temp_list.append(" ")
             temp_list.append(self.line)
             frame_list.append(temp_list)
             temp_list = []
         df = pd.DataFrame(frame_list, columns=list('ABCD'))
-        df.to_csv(self.file, index=False, header=False, sep=",", encoding="utf_8_sig", mode="a")
+        df.to_csv(self.result_file, index=False, header=False, sep=",", encoding="utf_8_sig", mode="a")
 
     def get_reslut(self):
         entity_name = ""
@@ -86,5 +104,28 @@ class Result(object):
     def parse_tag(self,t):
         m = re.match(r'^([^-]*)-(.*)$', t)
         return m.groups() if m else (t, '')
+
+    def relation_rule_invalid(self, label1, label2, rule):
+        try:
+            if rule[label1][label2]:
+                return False
+            return True
+        except KeyError as e:
+            return True
+
+    def get_rule_matrix(self, filepath, nrows):
+        df = pd.read_csv(filepath, header=0, encoding="gbk", index_col=0, nrows=nrows)
+        return df
+
+    def get_labels_num(self, file):
+        input_data = codecs.open(file, 'r', 'utf-8')
+        num = 0
+        for line in input_data.readlines():
+            line = line.strip()
+            word = line.split('-')
+            if word[0] == 'B':
+                num = num + 1
+        input_data.close()
+        return num
 
 

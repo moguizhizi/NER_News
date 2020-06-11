@@ -10,7 +10,6 @@ import numpy as np
 import codecs
 import pickle
 import os
-import sys
 from datetime import datetime
 import platform
 
@@ -18,6 +17,7 @@ from bert_base.train.models import create_model, InputFeatures
 from bert_base.bert import tokenization, modeling
 from bert_base.train.train_helper import get_args_parser
 from bert_base.bert.result import Result
+from bert_base.train.common import LABELS_DATA
 
 
 args = get_args_parser()
@@ -112,7 +112,7 @@ def predict_online(sentence):
 
         print("tags:" + str(pred_label_result[0]))
 
-        result = Result(sentence,pred_label_result[0],temp_sen,args.result_file)
+        result = Result(sentence,pred_label_result[0],temp_sen,args.result_file, args.rule_file, os.path.join(args.data_prepro_dir, LABELS_DATA))
         result.preprocess()
         result.write_to_file()
 
@@ -185,6 +185,10 @@ def convert_single_example(example, max_seq_length, tokenizer):
     return feature
 
 if __name__ == "__main__":
+
+    if os.path.exists(args.result_file):
+        os.remove(args.result_file)
+
     input_data = codecs.open(args.pre_file, 'r', 'utf-8')
     for line in input_data.readlines():
         line = line.strip()

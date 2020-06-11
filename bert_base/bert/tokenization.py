@@ -289,6 +289,7 @@ class WordpieceTokenizer(object):
       is_bad = False
       start = 0
       sub_tokens = []
+
       while start < len(chars):
         end = len(chars)
         cur_substr = None
