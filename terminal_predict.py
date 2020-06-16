@@ -18,6 +18,7 @@ from bert_base.bert import tokenization, modeling
 from bert_base.train.train_helper import get_args_parser
 from bert_base.bert.result import Result
 from bert_base.train.common import LABELS_DATA
+from data_preprocess.data_util import _cut
 
 
 args = get_args_parser()
@@ -192,7 +193,13 @@ if __name__ == "__main__":
     input_data = codecs.open(args.pre_file, 'r', 'utf-8')
     for line in input_data.readlines():
         line = line.strip()
-        predict_online(line)
+        sentence = _cut(line)
+
+        for i in sentence:
+            temp_line = "".join(i)
+            temp_line = temp_line.strip()
+            if len(temp_line) != 0:
+                predict_online(temp_line)
     input_data.close()
 
 

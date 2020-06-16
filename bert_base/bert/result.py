@@ -42,7 +42,8 @@ class Result(object):
                    temp_couple = (entity, lable)
                    entity_list.append(temp_couple)
 
-        entity_couple_list = list((itertools.combinations(entity_list, 2)))
+        entity_couple_list = list((itertools.permutations(entity_list, 2)))
+
         for temp_couple in entity_couple_list:
             temp_entity01 = temp_couple[0]
             temp_entity02 = temp_couple[1]
@@ -90,6 +91,7 @@ class Result(object):
     def init_labels_map(self):
         category = set()
         labels_map = {}
+
         for tag in self.tags:
             _, guessed_type = self.parse_tag(tag)
             if len(guessed_type) == 0:
