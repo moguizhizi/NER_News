@@ -97,7 +97,7 @@ def _cut(sentence):
     new_sentence = []
     sen = []
     for i in sentence:
-        if i.split(' ')[0] in ['。', '！', '？'] and len(sen) != 0:
+        if i.split(' ')[0] in ['。', '！', '？','\t'] and len(sen) != 0:
             sen.append(i)
             new_sentence.append(sen)
             sen = []
