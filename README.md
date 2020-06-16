@@ -103,17 +103,24 @@ organization_name: precision:  68.42%; recall:  70.48%; FB1:  69.44  171
              time: precision:  81.63%; recall:  87.91%; FB1:  84.66  98
              
 2	实体抽取
-
 第一步：待抽取的文件放置NERdata路径下，并更名为pre_text
 
-第二步：执行terminal_predict.py
+第二步：更改relation_rule.csv
+
+0：实体之间不存在关系
+1：实体之间存在关系
+注意：实体之间关系标注的顺序
+
+第三步：执行terminal_predict.py
 
 (tensorflow_py37_gpu) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# nohup python -u terminal_predict.py > logs/predict.log 2>&1 &
+
+注意：上述命令会自动加载out文件夹下checkpoint的模型参数，此模型参数来源于训练集，因此命令的执行要与训练集的执行命令保持一致；例如nohup python -u run.py -is_add_self_attention=True > logs/main.log 2>&1 &（训练集）对应的实体抽取的命令nohup python -u terminal_predict.py -is_add_self_attention=True > logs/predict.log 2>&1 &
 
 查看日志：
 (tensorflow_py37_gpu) root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master# cat logs/predict.log
 
-第三步：获取结果文件pre_result.csv
+第四步：获取结果文件pre_result.csv
 
 root@gpu:/sk/BertModel/BERT-BiLSTM-CRF-NER-master/result# ll
 total 8
