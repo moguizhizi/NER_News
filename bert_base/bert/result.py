@@ -52,8 +52,8 @@ class Result(object):
                 print(str(temp_entity01[1]) + " and " + str(temp_entity02[1]) + " is incompatible rule")
                 continue
 
-            temp_list.append(temp_entity01[0])
-            temp_list.append(temp_entity02[0])
+            temp_list.append("".join(temp_entity01[0]).replace("##",""))
+            temp_list.append("".join(temp_entity02[0]).replace("##",""))
             temp_list.append(" ")
             temp_list.append(self.line)
             frame_list.append(temp_list)
