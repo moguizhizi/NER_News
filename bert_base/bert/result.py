@@ -52,8 +52,20 @@ class Result(object):
                 print(str(temp_entity01[1]) + " and " + str(temp_entity02[1]) + " is incompatible rule")
                 continue
 
-            temp_list.append("".join(temp_entity01[0]).replace("##",""))
-            temp_list.append("".join(temp_entity02[0]).replace("##",""))
+            temp_str01 = "".join(temp_entity01[0]).replace("##","")
+            temp_str02 = "".join(temp_entity02[0]).replace("##","")
+
+            temp_str01 = temp_str01.strip()
+            temp_str02 = temp_str02.strip()
+
+            if temp_str01 == '[UNK]' or temp_str02 == '[UNK]':
+                continue
+
+            temp_str01 = self.replace_UNK(temp_str01,self.line)
+            temp_str02 = self.replace_UNK(temp_str02,self.line)
+
+            temp_list.append(temp_str01)
+            temp_list.append(temp_str02)
             temp_list.append(" ")
             temp_list.append(self.line)
             frame_list.append(temp_list)
@@ -129,5 +141,18 @@ class Result(object):
                 num = num + 1
         input_data.close()
         return num
+    
+    def replace_UNK(self, str, line):
+        is_find = str.find("[UNK]")
+        temp_str = str
+
+        try:
+            if is_find != -1:
+                regex_str = str.replace("[UNK]", ".")
+                temp_str = re.findall(regex_str, line)[0]
+        except IndexError as e:
+            return str
+
+        return temp_str
 
 
