@@ -104,7 +104,7 @@ def _cut(sentence):
             continue
         sen.append(i)
 
-    if len(new_sentence) == 1: #娄底那种一句话超过max_seq_length的且没有句号的，用,分割，再长的不考虑了。。。
+    if len(new_sentence) == 0: #娄底那种一句话超过max_seq_length的且没有句号的，用,分割，再长的不考虑了。。。
         new_sentence = []
         sen = []
         for i in sentence:

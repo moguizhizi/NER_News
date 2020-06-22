@@ -145,21 +145,7 @@ class BasicTokenizer(object):
     self.do_lower_case = do_lower_case
 
   def tokenize(self, text):
-    """Tokenizes a piece of text."""
-    text = convert_to_unicode(text)
-    text = self._clean_text(text)
-    print("tokenize:" + str(text))
-
-    # This was added on November 1st, 2018 for the multilingual and Chinese
-    # models. This is also applied to the English models now, but it doesn't
-    # matter since the English models were not trained on any Chinese data
-    # and generally don't have any Chinese data in them (there are Chinese
-    # characters in the vocabulary because Wikipedia does have some Chinese
-    # words in the English Wikipedia.).
-    text = self._tokenize_chinese_chars(text)
-
-    orig_tokens = whitespace_tokenize(text)
-    print("orig_tokens:" + str(orig_tokens))
+    orig_tokens = self.get_origin_tokens(text)
     split_tokens = []
     for token in orig_tokens:
       if self.do_lower_case:
@@ -170,6 +156,20 @@ class BasicTokenizer(object):
     output_tokens = whitespace_tokenize(" ".join(split_tokens))
     print("output_tokens:" + str(output_tokens))
     return output_tokens
+
+  def get_origin_tokens(self, text):
+    text = convert_to_unicode(text)
+    text = self._clean_text(text)
+    # This was added on November 1st, 2018 for the multilingual and Chinese
+    # models. This is also applied to the English models now, but it doesn't
+    # matter since the English models were not trained on any Chinese data
+    # and generally don't have any Chinese data in them (there are Chinese
+    # characters in the vocabulary because Wikipedia does have some Chinese
+    # words in the English Wikipedia.).
+    text = self._tokenize_chinese_chars(text)
+    orig_tokens = whitespace_tokenize(text)
+    print("orig_tokens:" + str(orig_tokens))
+    return orig_tokens
 
   def _run_strip_accents(self, text):
     """Strips accents from a piece of text."""
