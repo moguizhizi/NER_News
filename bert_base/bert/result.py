@@ -64,7 +64,7 @@ class Result(object):
             temp_str01 = self.replace_UNK(temp_str01,self.line)
             temp_str02 = self.replace_UNK(temp_str02,self.line)
 
-            if self.line.find(temp_str01) == -1 or self.line.find(temp_str01) == -1:
+            if self.line.find(temp_str01) == -1 or self.line.find(temp_str02) == -1:
                 continue
 
             temp_list.append(temp_str01)
