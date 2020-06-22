@@ -64,6 +64,9 @@ class Result(object):
             temp_str01 = self.replace_UNK(temp_str01,self.line)
             temp_str02 = self.replace_UNK(temp_str02,self.line)
 
+            if self.line.find(temp_str01) == -1 or self.line.find(temp_str01) == -1:
+                continue
+
             temp_list.append(temp_str01)
             temp_list.append(temp_str02)
             temp_list.append(" ")
@@ -141,7 +144,7 @@ class Result(object):
                 num = num + 1
         input_data.close()
         return num
-    
+
     def replace_UNK(self, str, line):
         is_find = str.find("[UNK]")
         temp_str = str
@@ -159,5 +162,6 @@ class Result(object):
             return str
 
         return temp_str
+
 
 
