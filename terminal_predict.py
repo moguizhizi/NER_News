@@ -97,7 +97,8 @@ def predict_online(sentence):
     global graph
     with graph.as_default():
         print('input the test sentence:')
-        temp_sen = sentence
+        temp_sen = tokenizer.basic_tokenizer.get_origin_tokens(sentence)
+        temp_sen = "".join(temp_sen)
         start = datetime.now()
         if len(sentence) < 2:
             print("invalid sentence:" + sentence)

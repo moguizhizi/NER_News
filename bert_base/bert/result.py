@@ -148,6 +148,11 @@ class Result(object):
 
         try:
             if is_find != -1:
+                str = str.replace(".", "\.")
+                str = str.replace("*", "\*")
+                str = str.replace(")", "\)")
+                str = str.replace("(", "\(")
+                str = str.replace("+", "\+")
                 regex_str = str.replace("[UNK]", ".")
                 temp_str = re.findall(regex_str, line)[0]
         except IndexError as e:
