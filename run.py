@@ -9,6 +9,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+
 import tensorflow as tf
 import shutil
 
@@ -24,9 +25,10 @@ def train_ner():
         print('usage: %s\n%20s   %s\n%s\n%s\n' % (' '.join(sys.argv), 'ARG', 'VALUE', '_' * 50, param_str))
     print(args)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.device_map
-    
-    shutil.rmtree(args.output_dir)    
-    
+
+    if os.path.isdir(args.output_dir):
+        shutil.rmtree(args.output_dir)
+
     train(args=args)
 if __name__ == '__main__':
     tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.DEBUG)
